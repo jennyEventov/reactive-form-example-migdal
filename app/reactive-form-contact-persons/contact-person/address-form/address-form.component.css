@@ -1,0 +1,33 @@
+.child-form {
+  border: 1px solid gray;
+  border-radius: 5px;
+  padding: 0 15px 15px;
+  margin: 10px 0 20px 0;
+}
+
+.child-form div {
+  padding: 5px;
+}
+
+.child-form div span {
+  padding-right: 10px;
+}
+
+.ng-invalid {
+  border-color: red !important;
+}
+
+.form-invalid {
+  color: red;
+}
+
+.form-valid {
+  color: green;
+}
+
+fieldset {
+  display: block;
+  margin: unset;
+  padding: unset;
+  border: unset;
+}
