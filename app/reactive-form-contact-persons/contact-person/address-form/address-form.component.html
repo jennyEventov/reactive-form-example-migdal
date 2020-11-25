@@ -1,0 +1,30 @@
+<div class="child-form" [ngClass]="{'ng-invalid': !addressForm.valid}">
+  <h2>child form</h2>
+  <div [ngClass]="{'form-invalid': !addressForm.valid, 'form-valid' : addressForm.valid}">
+    child form validity: {{addressForm.valid}}
+  </div>
+  <div>
+    <!-- emit delete event up w/ index of player -->
+    <button (click)="updateAddress()">Update Address</button>
+  </div>
+  <form [formGroup]="addressForm" >
+    <fieldset [disabled]="isDisabled">
+      <div>
+        <span>עיר</span>
+        <input type="text" formControlName="cityName"/>
+      </div>
+      <div>
+        <span>רחוב</span>
+        <input type="text" formControlName="streetName"/>
+      </div>
+      <div>
+        <span>מיקוד</span>
+        <input type="number" formControlName="zipCode"/>
+      </div>
+      <div>
+        <span>פלאפון</span>
+        <input type="number" formControlName="cellPhone"/>
+      </div>
+    </fieldset>
+  </form>
+</div>
