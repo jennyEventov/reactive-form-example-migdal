@@ -6,7 +6,6 @@ import {ContactPersonsFormService} from './contact-persons-form.service';
 @Component({
   selector: 'app-contact-persons',
   templateUrl: './contact-persons.component.html',
-  styleUrls: ['./contact-persons.component.css']
 })
 export class ContactPersonsComponent implements OnInit, OnDestroy {
 
