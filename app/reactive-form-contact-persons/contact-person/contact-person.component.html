@@ -1,0 +1,56 @@
+<div class="example-form" [ngClass]="{'ng-invalid': !contactPersonForm.valid}" >
+  <h1>parent form</h1>
+  <div [ngClass]="{'form-invalid': !contactPersonForm.valid, 'form-valid' : contactPersonForm.valid}">
+    form validity: {{contactPersonForm.valid}}
+  </div>
+  <form [formGroup]="contactPersonForm" >
+    <div>
+      <span>מספר זיהוי</span>
+      <input type="number" formControlName="identity"/>
+    </div>
+    <div>
+      <span>סוג זיהוי</span>
+      <select [compareWith]="compareFn" formControlName="identityType">
+        <option *ngFor="let identityType of identityTypes" [ngValue]="identityType.code" >
+          {{identityType.description}}
+        </option>
+      </select>
+    </div>
+    <div>
+      <span>שם פרטי</span>
+      <input type="text" formControlName="firstName"/>
+    </div>
+    <div>
+      <span>שם משפחה</span>
+      <input type="text" formControlName="lastName"/>
+    </div>
+    <div></div>
+    <div>
+      <span>אימ"ל</span>
+      <input type="text" formControlName="email" />
+    </div>
+    <app-address-form [addressForm]="address"></app-address-form>
+    <div>
+      <span>משלוח דואר</span>
+      <input type="checkbox" formControlName="deliveryFlag" />
+    </div>
+    <div>
+      <div formArrayName="preferredContactMeans" *ngFor="let contactMean of preferredContactMeansFormArray.controls; let i = index">
+        <input type="checkbox" [formControl]="contactMean">
+        {{claimContactPersonMeansLookup[i].value}}
+      </div>
+    </div>
+    <div>
+      <!-- emit delete event up w/ index of player -->
+      <button (click)="delete()">Delete</button>
+    </div>
+    <pre>Player Form Status: <span class="status">{{contactPersonForm.status}}</span></pre>
+  </form>
+</div>
+
+<hr>
+<div>
+  exampleForm
+  {{contactPersonForm.value | json}}
+</div>
+
