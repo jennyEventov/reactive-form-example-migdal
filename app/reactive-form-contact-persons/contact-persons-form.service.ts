@@ -32,13 +32,9 @@ export class ContactPersonsFormService {
     _.forEach(contactPersons, (contactPerson: ContactPerson) => {
       contactPersonsArray.push(
         this.fb.group(
-          new ContactPersonForm(contactPerson)
+          new ContactPersonForm(contactPerson, this.claimContactPersonMeansLookup)
         )
       );
-    });
-    _.forEach(contactPersonsArray.controls, (contactPersonForm) => {
-      const preferredContactMeans = contactPersonForm.get('preferredContactMeans') as FormArray;
-      contactPersonForm.controls.preferredContactMeans = this.buildPreferredContactMeans(preferredContactMeans.value, this.claimContactPersonMeansLookup);
     });
     this.contactPersonsForm.next(contactPersonsForm);
   }
@@ -48,7 +44,7 @@ export class ContactPersonsFormService {
     const contactPersonsArray = contactPersonsForm.get('contactPersons') as FormArray;
     contactPersonsArray.push(
       this.fb.group(
-        new ContactPersonForm(new ContactPerson())
+        new ContactPersonForm(new ContactPerson(), this.claimContactPersonMeansLookup)
       )
     );
     this.contactPersonsForm.next(contactPersonsForm);
@@ -60,12 +56,4 @@ export class ContactPersonsFormService {
     contactPersonsArray.removeAt(i);
     this.contactPersonsForm.next(contactPersonsForm);
   }
-
-  private buildPreferredContactMeans(preferredContactMeans: any[], claimContactPersonMeansLookup: any[]) {
-    const arr = claimContactPersonMeansLookup.map(contactPersonMean => {
-      return  _.contains(preferredContactMeans, contactPersonMean.code) ? this.fb.control(true) : this.fb.control(false);
-    });
-    return this.fb.array(arr);
-  }
-
 }
