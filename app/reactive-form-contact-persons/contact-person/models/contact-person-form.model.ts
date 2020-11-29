@@ -19,7 +19,7 @@ export class ContactPersonForm implements IndexSignature {
   deliveryFlag = new FormControl();
   preferredContactMeans = new FormArray([]);
 
-  constructor(contactPerson: ContactPerson) {
+  constructor(contactPerson: ContactPerson, claimContactPersonMeansLookup: any[]) {
 if (contactPerson) {
       this.identity.patchValue(contactPerson.identity);
       this.identity.setValidators([Validators.required]);
