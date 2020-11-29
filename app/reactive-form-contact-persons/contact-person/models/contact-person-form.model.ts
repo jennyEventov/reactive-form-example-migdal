@@ -19,22 +19,22 @@ export class ContactPersonForm implements IndexSignature {
   preferredContactMeans = new FormArray([]);
 
   constructor(contactPerson: ContactPerson) {
-    if (contactPerson) {
-      this.identity.setValue(contactPerson.identity);
+if (contactPerson) {
+      this.identity.patchValue(contactPerson.identity);
       this.identity.setValidators([Validators.required]);
-      this.identityType.setValue(contactPerson.identityType);
-      this.firstName.setValue(contactPerson.firstName);
-      this.lastName.setValue(contactPerson.lastName);
-      this.email.setValue(contactPerson.email);
+      this.identityType.patchValue(contactPerson.identityType);
+      this.firstName.patchValue(contactPerson.firstName);
+      this.lastName.patchValue(contactPerson.lastName);
+      this.email.patchValue(contactPerson.email);
       this.email.setValidators([Validators.required, Validators.email]);
-      this.deliveryFlag.setValue(contactPerson.deliveryFlag);
+      this.deliveryFlag.patchValue(contactPerson.deliveryFlag);
       if (contactPerson.address) {
-        this.address.setValue(contactPerson.address);
+        this.address.patchValue(contactPerson.address);
       }
       if (contactPerson.preferredContactMeans) {
-        contactPerson.preferredContactMeans.forEach((preferredContactMean: any) => {
-          this.preferredContactMeans.push(new FormControl(preferredContactMean));
-        });
+        this.preferredContactMeans = new FormArray(claimContactPersonMeansLookup.map(contactPersonMean => {
+          return  _.contains(contactPerson.preferredContactMeans, contactPersonMean.code) ? new FormControl(true) : new FormControl(false);
+        }));
       }
     }
   }
