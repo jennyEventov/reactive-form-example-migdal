@@ -36,7 +36,7 @@
     </div>
     <div>
       <div formArrayName="preferredContactMeans" *ngFor="let contactMean of preferredContactMeansFormArray.controls; let i = index">
-        <input type="checkbox" [formControl]="contactMean">
+        <input type="checkbox" [formControl]="contactMean" >
         {{claimContactPersonMeansLookup[i].value}}
       </div>
     </div>
